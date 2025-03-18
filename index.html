@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasapalabra</title>
+</head>
+<style>
+    .currentLetter {
+        border: 2px solid red;
+
+    }
+</style>
+
+<body>
+    <form onsubmit="enviarForm()">
+        <table>
+            <tr id="table">
+
+            </tr>
+        </table>
+        <input type="submit" value="Siguiente">
+    </form>
+</body>
+<script src="preguntas.js"></script>
+<script>
+    if (!sessionStorage.getItem("iteration")) {
+        sessionStorage.setItem("iteration", 0);
+    }
+    console.log(sessionStorage.getItem("iteration"));
+
+    function enviarForm(){
+        let value = parseInt(sessionStorage.getItem("iteration"));
+        value++;
+        if(value < 26){
+            sessionStorage.setItem("iteration", value);
+        } else {
+            sessionStorage.setItem("iteration", 0);
+        }
+    }
+
+    function printRosco() {
+        let i = 0;
+        for (let element of preguntas) {
+            let row = document.getElementById("table");
+            let celda = document.createElement("td");
+            celda.innerHTML = element.letra;
+            if (sessionStorage.getItem("iteration") == i) {
+                celda.className = "currentLetter";
+            }
+            row.appendChild(celda);
+            i++;
+        }
+    }
+
+    printRosco();
+</script>
+
+</html>
