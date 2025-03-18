@@ -8,32 +8,90 @@
 </head>
 <style>
     .currentLetter {
-        border: 2px solid red;
+        border: 2px solid lightskyblue;
 
+    }
+
+    .correct {
+        background-color: lightgreen;
+    }
+
+    .incorrect {
+        background-color: red;
+    }
+
+    .abecedario {
+        background-color: white;
     }
 </style>
 
 <body>
-    <form onsubmit="enviarForm()">
+    <form id="form">
         <table>
             <tr id="table">
 
             </tr>
         </table>
-        <input type="submit" value="Siguiente">
+        <input type="text" id="text_box">
+        <button type="submit" value="0" id="skip">Pasapalabra</button>
+        <button type="submit" value="1" id="next">Contestar</button>
     </form>
 </body>
 <script src="preguntas.js"></script>
 <script>
+    if (!sessionStorage.getItem("preguntas")) {
+        sessionStorage.setItem("preguntas", JSON.stringify(preguntas));
+    }
+
     if (!sessionStorage.getItem("iteration")) {
         sessionStorage.setItem("iteration", 0);
     }
-    console.log(sessionStorage.getItem("iteration"));
 
-    function enviarForm(){
+    function cleanString(str) {
+        //primero quitamos los espacios al principio y al final
+        str = str.trim();
+        //segundo eliminamos acentos y lo convertimos a minusculas
+        str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        return str;
+    }
+
+    function enviarForm(event) {
+        //Cargamos las variables de sesion
+        let preguntasSS = JSON.parse(sessionStorage.getItem("preguntas"));
+
+        //Primero comprobamos si ha contestado o pasapalabra.
+        if (event.submitter.value > 0) {
+            //A continuación comprobamos que la respuesta sea correcta.
+            let i = sessionStorage.getItem("iteration");
+            let elemento = preguntasSS[i];
+            let true_response = cleanString(elemento.respuesta);
+            let user_response = cleanString(document.getElementById("text_box").value);
+
+            if (true_response == user_response) {
+                alert("Has acertado la pregunta");
+                preguntasSS[i].estado = 2;
+                console.log(preguntasSS[i]);
+            } else {
+                alert("Has fallado la pregunta");
+                preguntasSS[i].estado = 1;
+            }
+
+            //actualizamos las preguntas en el sessionStorage
+            sessionStorage.setItem("preguntas", JSON.stringify(preguntasSS));
+        } else {
+            alert("Pasapalabra!");
+        }
+
+        //Por último itereamos hasta la próxima pregunta sin contestar.
+        do {
+            iterarRosco();
+        } while (preguntasSS[sessionStorage.getItem("iteration")].estado > 0);
+    }
+
+    function iterarRosco() {
         let value = parseInt(sessionStorage.getItem("iteration"));
         value++;
-        if(value < 26){
+        if (value < 26) {
             sessionStorage.setItem("iteration", value);
         } else {
             sessionStorage.setItem("iteration", 0);
@@ -46,14 +104,30 @@
             let row = document.getElementById("table");
             let celda = document.createElement("td");
             celda.innerHTML = element.letra;
-            if (sessionStorage.getItem("iteration") == i) {
-                celda.className = "currentLetter";
+
+            // Indicamos la clase que recibirá el div
+            if (element.estado == 1) {
+                celda.className = "incorrect"
+            } else if (element.estado == 2) {
+                celda.className = "correct"
+            } else {
+                if (sessionStorage.getItem("iteration") == i) {
+                    celda.className = "currentLetter";
+                } else {
+                    celda.className = "abecedario";
+                }
             }
+
+
             row.appendChild(celda);
             i++;
         }
     }
+    // añadimos el evento submit al formulario
+    let form = document.getElementById("form");
+    form.addEventListener("submit", enviarForm);
 
+    //Pintamos el rosco
     printRosco();
 </script>
 
