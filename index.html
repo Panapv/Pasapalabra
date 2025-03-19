@@ -26,6 +26,11 @@
 </style>
 
 <body>
+    <div>
+        <p id="timer"></p>
+        <p id="aciertos"></p>
+        <p id="fallos"></p>
+    </div>
     <form id="form">
         <table>
             <tr id="table">
@@ -45,6 +50,18 @@
 
     if (!sessionStorage.getItem("iteration")) {
         sessionStorage.setItem("iteration", 0);
+    }
+
+    if (!sessionStorage.getItem("aciertos")) {
+        sessionStorage.setItem("aciertos", 0);
+    }
+
+    if (!sessionStorage.getItem("fallos")) {
+        sessionStorage.setItem("fallos", 0);
+    }
+
+    if (!sessionStorage.getItem("timer")) {
+        sessionStorage.setItem("timer", 300);
     }
 
     function cleanString(str) {
@@ -70,16 +87,21 @@
             if (true_response == user_response) {
                 alert("Has acertado la pregunta");
                 preguntasSS[i].estado = 2;
-                console.log(preguntasSS[i]);
+                let value = parseInt(sessionStorage.getItem("aciertos"));
+                value++;
+                sessionStorage.setItem("aciertos", value);
             } else {
                 alert("Has fallado la pregunta");
                 preguntasSS[i].estado = 1;
+                let value = parseInt(sessionStorage.getItem("fallos"));
+                value++;
+                sessionStorage.setItem("fallos", value);
             }
 
             //actualizamos las preguntas en el sessionStorage
             sessionStorage.setItem("preguntas", JSON.stringify(preguntasSS));
         } else {
-            alert("Pasapalabra!");
+            //alert("Pasapalabra!");
         }
 
         //Por último itereamos hasta la próxima pregunta sin contestar.
@@ -100,7 +122,8 @@
 
     function printRosco() {
         let i = 0;
-        for (let element of preguntas) {
+        let preguntaSS = JSON.parse(sessionStorage.getItem("preguntas"));
+        for (let element of preguntaSS) {
             let row = document.getElementById("table");
             let celda = document.createElement("td");
             celda.innerHTML = element.letra;
@@ -117,18 +140,51 @@
                     celda.className = "abecedario";
                 }
             }
-
-
             row.appendChild(celda);
             i++;
         }
     }
+
+    function printAciertosFallos() {
+        let aciertos = parseInt(sessionStorage.getItem("aciertos"));
+        let fallos = parseInt(sessionStorage.getItem("fallos"));
+
+        let tag_aciertos = document.getElementById("aciertos");
+        let tag_fallos = document.getElementById("fallos");
+
+        tag_aciertos.innerHTML = "Aciertos: " + aciertos;
+        tag_fallos.innerHTML = "Fallos: " + fallos;
+    }
+
+    function updateTimer() {
+        let tiempoRestante = parseInt(sessionStorage.getItem("timer"));
+        const display = document.getElementById("timer");
+
+        display.textContent = tiempoRestante + "s";
+
+        if (tiempoRestante <= 0) {
+            clearInterval(intervalo);
+            alert("¡Tiempo finalizado!"); // Acción cuando el tiempo termina
+            sessionStorage.removeItem("timer");
+        } else {
+            tiempoRestante--;
+            sessionStorage.setItem("timer", tiempoRestante);
+        }
+    }
+
+    function printWebHTML() {
+        printRosco();
+        printAciertosFallos();
+        let intervalo = setInterval(updateTimer, 1000);
+        updateTimer();
+    }
+
     // añadimos el evento submit al formulario
     let form = document.getElementById("form");
     form.addEventListener("submit", enviarForm);
 
-    //Pintamos el rosco
-    printRosco();
+    //Pintamos el contenido de la pagina web
+    printWebHTML();
 </script>
 
 </html>
