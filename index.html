@@ -26,17 +26,20 @@
 </style>
 
 <body>
-    <div>
+    <div id="contadores">
         <p id="timer"></p>
         <p id="aciertos"></p>
         <p id="fallos"></p>
     </div>
-    <form id="form">
-        <table>
-            <tr id="table">
 
-            </tr>
-        </table>
+    <div>
+        <div id="rosco">
+        </div>
+        <div id="question">
+
+        </div>
+    </div>
+    <form id="form">
         <input type="text" id="text_box">
         <button type="submit" value="0" id="skip">Pasapalabra</button>
         <button type="submit" value="1" id="next">Contestar</button>
@@ -124,23 +127,23 @@
         let i = 0;
         let preguntaSS = JSON.parse(sessionStorage.getItem("preguntas"));
         for (let element of preguntaSS) {
-            let row = document.getElementById("table");
-            let celda = document.createElement("td");
-            celda.innerHTML = element.letra;
+            let rosco = document.getElementById("rosco");
+            let letra_div = document.createElement("div");
+            letra_div.innerHTML = element.letra;
 
             // Indicamos la clase que recibirá el div
             if (element.estado == 1) {
-                celda.className = "incorrect"
+                letra_div.className = "incorrect"
             } else if (element.estado == 2) {
-                celda.className = "correct"
+                letra_div.className = "correct"
             } else {
                 if (sessionStorage.getItem("iteration") == i) {
-                    celda.className = "currentLetter";
+                    letra_div.className = "currentLetter";
                 } else {
-                    celda.className = "abecedario";
+                    letra_div.className = "abecedario";
                 }
             }
-            row.appendChild(celda);
+            rosco.appendChild(letra_div);
             i++;
         }
     }
@@ -172,9 +175,18 @@
         }
     }
 
+    function printQuestion(){
+        let preguntasSS = JSON.parse(sessionStorage.getItem("preguntas"));
+        let i = sessionStorage.getItem("iteration");
+
+        let div = document.getElementById("question");
+        div.innerHTML = preguntasSS[i].pregunta;
+    }
+
     function printWebHTML() {
         printRosco();
         printAciertosFallos();
+        printQuestion();
         let intervalo = setInterval(updateTimer, 1000);
         updateTimer();
     }
