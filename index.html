@@ -5,44 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pasapalabra</title>
+    <link rel="stylesheet" href="./Estilos/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fontisto/css/fontisto/fontisto.min.css">
+    <link rel="stylesheet" href="./Estilos/estilos.css">
 </head>
-<style>
-    .currentLetter {
-        border: 2px solid lightskyblue;
-
-    }
-
-    .correct {
-        background-color: lightgreen;
-    }
-
-    .incorrect {
-        background-color: red;
-    }
-
-    .abecedario {
-        background-color: white;
-    }
-</style>
-
 <body>
-    <div id="contadores">
-        <p id="timer"></p>
-        <p id="aciertos"></p>
-        <p id="fallos"></p>
-    </div>
-
-    <div>
-        <div id="rosco">
+    <form class="form" id="form">
+    <div class="contenedor">
+        <div class="rosco" id="rosco">
+            <div class="inRosco">
+                <h1>Empieza o Contiene:</h1>
+                <p id="pregunta"></p>
+                <input type="submit" value="Pasapalabra" id="pasapalabra" class="boton">
+            </div>
         </div>
-        <div id="question">
+        <div class="inputs">
+            <div class="tiempo-y-aciertos">
+                <div class="temporizador" id="temporizador"></div>
+                <div class="aciertos" id="aciertos"></div>
+            </div>
 
+            <input type="text" id="respuesta">
+            <input type="submit" value="Contestar" id="contestar" class="botonEnviar">
         </div>
     </div>
-    <form id="form">
-        <input type="text" id="text_box">
-        <button type="submit" value="0" id="skip">Pasapalabra</button>
-        <button type="submit" value="1" id="next">Contestar</button>
     </form>
 </body>
 <script src="preguntas.js"></script>
@@ -78,14 +64,13 @@
     function enviarForm(event) {
         //Cargamos las variables de sesion
         let preguntasSS = JSON.parse(sessionStorage.getItem("preguntas"));
-
         //Primero comprobamos si ha contestado o pasapalabra.
-        if (event.submitter.value > 0) {
+        if (event.submitter.id == "contestar") {
             //A continuación comprobamos que la respuesta sea correcta.
             let i = sessionStorage.getItem("iteration");
             let elemento = preguntasSS[i];
             let true_response = cleanString(elemento.respuesta);
-            let user_response = cleanString(document.getElementById("text_box").value);
+            let user_response = cleanString(document.getElementById("respuesta").value);
 
             if (true_response == user_response) {
                 alert("Has acertado la pregunta");
@@ -124,8 +109,10 @@
     }
 
     function printRosco() {
-        let i = 0;
+        let i = sessionStorage.getItem("iteration");
         let preguntaSS = JSON.parse(sessionStorage.getItem("preguntas"));
+        let current = preguntaSS[i].letra;
+        preguntaSS = preguntaSS.reverse();
         for (let element of preguntaSS) {
             let rosco = document.getElementById("rosco");
             let letra_div = document.createElement("div");
@@ -137,33 +124,29 @@
             } else if (element.estado == 2) {
                 letra_div.className = "correct"
             } else {
-                if (sessionStorage.getItem("iteration") == i) {
+                if (element.letra == current) {
                     letra_div.className = "currentLetter";
                 } else {
                     letra_div.className = "abecedario";
                 }
             }
-            rosco.appendChild(letra_div);
-            i++;
+            rosco.prepend(letra_div);
         }
     }
 
-    function printAciertosFallos() {
+    function printAciertos() {
         let aciertos = parseInt(sessionStorage.getItem("aciertos"));
-        let fallos = parseInt(sessionStorage.getItem("fallos"));
 
         let tag_aciertos = document.getElementById("aciertos");
-        let tag_fallos = document.getElementById("fallos");
 
-        tag_aciertos.innerHTML = "Aciertos: " + aciertos;
-        tag_fallos.innerHTML = "Fallos: " + fallos;
+        tag_aciertos.innerHTML = aciertos;
     }
 
-    function updateTimer() {
+    function updateTimer(intervalo) {
         let tiempoRestante = parseInt(sessionStorage.getItem("timer"));
-        const display = document.getElementById("timer");
+        const display = document.getElementById("temporizador");
 
-        display.textContent = tiempoRestante + "s";
+        display.innerHTML = tiempoRestante;
 
         if (tiempoRestante <= 0) {
             clearInterval(intervalo);
@@ -179,16 +162,16 @@
         let preguntasSS = JSON.parse(sessionStorage.getItem("preguntas"));
         let i = sessionStorage.getItem("iteration");
 
-        let div = document.getElementById("question");
+        let div = document.getElementById("pregunta");
         div.innerHTML = preguntasSS[i].pregunta;
     }
 
     function printWebHTML() {
         printRosco();
-        printAciertosFallos();
+        printAciertos();
         printQuestion();
         let intervalo = setInterval(updateTimer, 1000);
-        updateTimer();
+        updateTimer(intervalo);
     }
 
     // añadimos el evento submit al formulario
@@ -198,5 +181,4 @@
     //Pintamos el contenido de la pagina web
     printWebHTML();
 </script>
-
 </html>

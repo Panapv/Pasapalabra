@@ -1,5 +1,5 @@
 let preguntas = [
-  { "letra": "A", "pregunta": "", "respuesta": "A", "estado": 0 },
+  { "letra": "A", "pregunta": "Lore ipsum", "respuesta": "A", "estado": 0 },
   { "letra": "B", "pregunta": "", "respuesta": "B", "estado": 0 },
   { "letra": "C", "pregunta": "", "respuesta": "C", "estado": 0 },
   { "letra": "D", "pregunta": "", "respuesta": "D", "estado": 0 },
