@@ -132,7 +132,7 @@ h1 {
     transition: all 0.3s ease;
 }
 
-.correcta, .incorrecta, .currentLetter, .abecedario {
+.correct, .incorrect, .currentLetter, .abecedario {
     border: 2px solid white;
     position: absolute;
     width: 7%;
@@ -206,153 +206,116 @@ h1 {
 .rosco>div:nth-child(1) {
     transform: rotate(276deg) translateX(15vw) rotate(-276deg);
 }
-
 .rosco>div:nth-child(2) {
     transform: rotate(289.8deg) translateX(15vw) rotate(-289.8deg);
 }
-
 .rosco>div:nth-child(3) {
     transform: rotate(303.6deg) translateX(15vw) rotate(-303.6deg);
 }
-
 .rosco>div:nth-child(4) {
     transform: rotate(317.4deg) translateX(15vw) rotate(-317.4deg);
 }
-
 .rosco>div:nth-child(5) {
     transform: rotate(331.2deg) translateX(15vw) rotate(-331.2deg);
 }
-
 .rosco>div:nth-child(6) {
     transform: rotate(345deg) translateX(15vw) rotate(-345deg);
 }
-
 .rosco>div:nth-child(7) {
     transform: rotate(0deg) translateX(15vw) rotate(0deg);
 }
-
 .rosco>div:nth-child(8) {
     transform: rotate(13.8deg) translateX(15vw) rotate(-13.8deg);
 }
-
 .rosco>div:nth-child(9) {
     transform: rotate(27.6deg) translateX(15vw) rotate(-27.6deg);
 }
-
 .rosco>div:nth-child(10) {
     transform: rotate(41.4deg) translateX(15vw) rotate(-41.4deg);
 }
-
 .rosco>div:nth-child(11) {
     transform: rotate(55.2deg) translateX(15vw) rotate(-55.2deg);
 }
-
 .rosco>div:nth-child(12) {
     transform: rotate(69deg) translateX(15vw) rotate(-69deg);
 }
-
 .rosco>div:nth-child(13) {
     transform: rotate(82.8deg) translateX(15vw) rotate(-82.8deg);
 }
-
 .rosco>div:nth-child(14) {
     transform: rotate(96.6deg) translateX(15vw) rotate(-96.6deg);
 }
-
 .rosco>div:nth-child(15) {
     transform: rotate(110.4deg) translateX(15vw) rotate(-110.4deg);
 }
-
 .rosco>div:nth-child(16) {
     transform: rotate(124.2deg) translateX(15vw) rotate(-124.2deg);
 }
-
 .rosco>div:nth-child(17) {
     transform: rotate(138deg) translateX(15vw) rotate(-138deg);
 }
-
 .rosco>div:nth-child(18) {
     transform: rotate(151.8deg) translateX(15vw) rotate(-151.8deg);
 }
-
 .rosco>div:nth-child(19) {
     transform: rotate(165.6deg) translateX(15vw) rotate(-165.6deg);
 }
-
 .rosco>div:nth-child(20) {
     transform: rotate(179.4deg) translateX(15vw) rotate(-179.4deg);
 }
-
 .rosco>div:nth-child(21) {
     transform: rotate(193.2deg) translateX(15vw) rotate(-193.2deg);
 }
-
 .rosco>div:nth-child(22) {
     transform: rotate(207deg) translateX(15vw) rotate(-207deg);
 }
-
 .rosco>div:nth-child(23) {
     transform: rotate(220.8deg) translateX(15vw) rotate(-220.8deg);
 }
-
 .rosco>div:nth-child(24) {
     transform: rotate(234.6deg) translateX(15vw) rotate(-234.6deg);
 }
-
 .rosco>div:nth-child(25) {
     transform: rotate(248.4deg) translateX(15vw) rotate(-248.4deg);
 }
-
 .rosco>div:nth-child(26) {
     transform: rotate(262.2deg) translateX(15vw) rotate(-262.2deg);
 }
-
 
 @media screen and (max-width: 600px) {
     body {
         background-size: cover;
         background-position: center;
     }
-
     .rosco {
         width: 40vw;
         height: 40vw;
         position: relative;
         border-radius: 50%;
     }
-
     .contenedor {
         margin-top: auto;
         margin-bottom: auto;
     }
-
     .temporizador {
         width: 8vw;
         height: 8vw;
         font-size: 2vw;
     }
-
     .aciertos {
         width: 4.5vw;
         height: 4.5vw;
         font-size: 1.5vw;
     }
-
-    .boton,
-    .botonEnviar {
+    .boton, .botonEnviar {
         font-size: 1.5vw;
         padding: 3% 6%;
     }
-
     #respuesta {
         font-size: 1.5vw;
         padding: 3% 6%;
     }
-
-    .correcta,
-    .incorrecta,
-    .currentLetter,
-    .abecedario {
+    .correct, .incorrect, .currentLetter, .abecedario {
         font-size: 1.5vw;
         border: 1px solid white;
         align-items: center;
@@ -381,10 +344,7 @@ h1 {
         margin: 0 auto;
     }
 
-    .correcta,
-    .incorrecta,
-    .currentLetter,
-    .abecedario {
+    .correct, .incorrect, .currentLetter, .abecedario {
         font-size: 1.5vw;
         border: 1px solid white;
         align-items: center;
