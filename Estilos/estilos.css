@@ -1,8 +1,10 @@
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     overflow: hidden;
 }
+
 body {
     height: 100%;
     display: flex;
@@ -55,7 +57,9 @@ h1 {
     font-size: 1.8vw;
     font-weight: bold;
     border-radius: 50%;
-    border: 1px solid white;
+    border: 2px solid white;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4), -4px -4px 10px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(145deg, #005bb5, #0095ff);
 }
 
 .aciertos {
@@ -69,10 +73,12 @@ h1 {
     font-size: 1vw;
     font-weight: bold;
     border-radius: 50%;
-    border: 1px solid white;
+    border: 2px solid white;
     position: absolute;
     bottom: -10%;
     left: 65%;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3), -4px -4px 8px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(145deg, #34d058, #28a745);
 }
 
 .inRosco {
@@ -140,6 +146,8 @@ h1 {
     font-size: 1.5vw;
     font-weight: bold;
     transform-origin: 50% 50%;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4), -4px -4px 10px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(145deg, #005bb5, #0095ff);
 }
 
 .currentLetter {
@@ -172,6 +180,8 @@ h1 {
     font-size: 1.5vw;
     font-weight: bold;
     transform-origin: 50% 50%;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3), -4px -4px 8px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(145deg, #34d058, #28a745);
 }
 
 .incorrect {
@@ -188,129 +198,134 @@ h1 {
     font-size: 1.5vw;
     font-weight: bold;
     transform-origin: 50% 50%;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3), -4px -4px 8px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(145deg, #ff4f4f, #ff0000);
 }
 
 /* Distribuye las letras alrededor del círculo */
-.rosco > div:nth-child(1) {
+.rosco>div:nth-child(1) {
     transform: rotate(276deg) translateX(15vw) rotate(-276deg);
 }
 
-.rosco > div:nth-child(2) {
+.rosco>div:nth-child(2) {
     transform: rotate(289.8deg) translateX(15vw) rotate(-289.8deg);
 }
 
-.rosco > div:nth-child(3) {
+.rosco>div:nth-child(3) {
     transform: rotate(303.6deg) translateX(15vw) rotate(-303.6deg);
 }
 
-.rosco > div:nth-child(4) {
+.rosco>div:nth-child(4) {
     transform: rotate(317.4deg) translateX(15vw) rotate(-317.4deg);
 }
 
-.rosco > div:nth-child(5) {
+.rosco>div:nth-child(5) {
     transform: rotate(331.2deg) translateX(15vw) rotate(-331.2deg);
 }
 
-.rosco > div:nth-child(6) {
+.rosco>div:nth-child(6) {
     transform: rotate(345deg) translateX(15vw) rotate(-345deg);
 }
 
-.rosco > div:nth-child(7) {
+.rosco>div:nth-child(7) {
     transform: rotate(0deg) translateX(15vw) rotate(0deg);
 }
 
-.rosco > div:nth-child(8) {
+.rosco>div:nth-child(8) {
     transform: rotate(13.8deg) translateX(15vw) rotate(-13.8deg);
 }
 
-.rosco > div:nth-child(9) {
+.rosco>div:nth-child(9) {
     transform: rotate(27.6deg) translateX(15vw) rotate(-27.6deg);
 }
 
-.rosco > div:nth-child(10) {
+.rosco>div:nth-child(10) {
     transform: rotate(41.4deg) translateX(15vw) rotate(-41.4deg);
 }
 
-.rosco > div:nth-child(11) {
+.rosco>div:nth-child(11) {
     transform: rotate(55.2deg) translateX(15vw) rotate(-55.2deg);
 }
 
-.rosco > div:nth-child(12) {
+.rosco>div:nth-child(12) {
     transform: rotate(69deg) translateX(15vw) rotate(-69deg);
 }
 
-.rosco > div:nth-child(13) {
+.rosco>div:nth-child(13) {
     transform: rotate(82.8deg) translateX(15vw) rotate(-82.8deg);
 }
 
-.rosco > div:nth-child(14) {
+.rosco>div:nth-child(14) {
     transform: rotate(96.6deg) translateX(15vw) rotate(-96.6deg);
 }
 
-.rosco > div:nth-child(15) {
+.rosco>div:nth-child(15) {
     transform: rotate(110.4deg) translateX(15vw) rotate(-110.4deg);
 }
 
-.rosco > div:nth-child(16) {
+.rosco>div:nth-child(16) {
     transform: rotate(124.2deg) translateX(15vw) rotate(-124.2deg);
 }
 
-.rosco > div:nth-child(17) {
+.rosco>div:nth-child(17) {
     transform: rotate(138deg) translateX(15vw) rotate(-138deg);
 }
 
-.rosco > div:nth-child(18) {
+.rosco>div:nth-child(18) {
     transform: rotate(151.8deg) translateX(15vw) rotate(-151.8deg);
 }
 
-.rosco > div:nth-child(19) {
+.rosco>div:nth-child(19) {
     transform: rotate(165.6deg) translateX(15vw) rotate(-165.6deg);
 }
 
-.rosco > div:nth-child(20) {
+.rosco>div:nth-child(20) {
     transform: rotate(179.4deg) translateX(15vw) rotate(-179.4deg);
 }
 
-.rosco > div:nth-child(21) {
+.rosco>div:nth-child(21) {
     transform: rotate(193.2deg) translateX(15vw) rotate(-193.2deg);
 }
 
-.rosco > div:nth-child(22) {
+.rosco>div:nth-child(22) {
     transform: rotate(207deg) translateX(15vw) rotate(-207deg);
 }
 
-.rosco > div:nth-child(23) {
+.rosco>div:nth-child(23) {
     transform: rotate(220.8deg) translateX(15vw) rotate(-220.8deg);
 }
 
-.rosco > div:nth-child(24) {
+.rosco>div:nth-child(24) {
     transform: rotate(234.6deg) translateX(15vw) rotate(-234.6deg);
 }
 
-.rosco > div:nth-child(25) {
+.rosco>div:nth-child(25) {
     transform: rotate(248.4deg) translateX(15vw) rotate(-248.4deg);
 }
 
-.rosco > div:nth-child(26) {
+.rosco>div:nth-child(26) {
     transform: rotate(262.2deg) translateX(15vw) rotate(-262.2deg);
 }
 
 
 @media screen and (max-width: 600px) {
-    body{
+    body {
         background-size: cover;
         background-position: center;
     }
+
     .rosco {
         width: 40vw;
         height: 40vw;
         position: relative;
         border-radius: 50%;
     }
+
     .contenedor {
         margin-top: auto;
         margin-bottom: auto;
     }
+
     .temporizador {
         width: 8vw;
         height: 8vw;
@@ -334,7 +349,10 @@ h1 {
         padding: 3% 6%;
     }
 
-    .correcta, .incorrecta, .currentLetter, .abecedario {
+    .correcta,
+    .incorrecta,
+    .currentLetter,
+    .abecedario {
         font-size: 1.5vw;
         border: 1px solid white;
         align-items: center;
@@ -347,37 +365,47 @@ h1 {
 }
 
 @media screen and (min-width: 601px) and (max-width: 1024px) {
-    body{
+    body {
         background-size: cover;
         background-position: center;
     }
+
     .contenedor {
         margin-top: auto;
         margin-bottom: auto;
     }
+
     .rosco {
         width: 50vw;
         height: 50vw;
         margin: 0 auto;
     }
-    .correcta, .incorrecta, .currentLetter, .abecedario {
+
+    .correcta,
+    .incorrecta,
+    .currentLetter,
+    .abecedario {
         font-size: 1.5vw;
-        border: 1.5px solid white;
+        border: 1px solid white;
         align-items: center;
         justify-content: center;
     }
+
     #pregunta {
         font-size: 1.5vw;
     }
+
     #respuesta {
         font-size: 1.5vw;
         padding: 3% 6%;
     }
+
     .boton,
     .botonEnviar {
         font-size: 1.5vw;
         padding: 3% 6%;
     }
+
     .aciertos {
         width: 3.5vw;
         height: 3.5vw;
