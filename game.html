@@ -9,26 +9,53 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fontisto/css/fontisto/fontisto.min.css">
     <link rel="stylesheet" href="./Estilos/estilos.css">
 </head>
+
 <body>
     <form class="form" id="form">
-    <div class="contenedor">
-        <div class="rosco" id="rosco">
-            <div class="inRosco">
-                <h1>Empieza o Contiene:</h1>
-                <p id="pregunta"></p>
-                <input type="submit" value="Pasapalabra" id="pasapalabra" class="boton">
+        <div class="contenedor">
+            <div class="rosco" id="rosco">
+                <div class="abecedario">A</div>
+                <div class="abecedario">B</div>
+                <div class="abecedario">C</div>
+                <div class="abecedario">D</div>
+                <div class="abecedario">E</div>
+                <div class="abecedario">F</div>
+                <div class="abecedario">G</div>
+                <div class="abecedario">H</div>
+                <div class="abecedario">I</div>
+                <div class="abecedario">J</div>
+                <div class="abecedario">K</div>
+                <div class="abecedario">L</div>
+                <div class="abecedario">M</div>
+                <div class="abecedario">N</div>
+                <div class="abecedario">O</div>
+                <div class="abecedario">P</div>
+                <div class="abecedario">Q</div>
+                <div class="abecedario">R</div>
+                <div class="abecedario">S</div>
+                <div class="abecedario">T</div>
+                <div class="abecedario">U</div>
+                <div class="abecedario">V</div>
+                <div class="abecedario">W</div>
+                <div class="abecedario">X</div>
+                <div class="abecedario">Y</div>
+                <div class="abecedario">Z</div>
+                <div class="inRosco">
+                    <h1 id="questionType">Empieza o Contiene:</h1>
+                    <p id="pregunta"></p>
+                    <input type="submit" value="Pasapalabra" id="pasapalabra" class="boton">
+                </div>
             </div>
-        </div>
-        <div class="inputs">
-            <div class="tiempo-y-aciertos">
-                <div class="temporizador" id="temporizador"></div>
-                <div class="aciertos" id="aciertos"></div>
-            </div>
+            <div class="inputs">
+                <div class="tiempo-y-aciertos">
+                    <div class="temporizador" id="temporizador"></div>
+                    <div class="aciertos" id="aciertos"></div>
+                </div>
 
-            <input type="text" id="respuesta">
-            <input type="submit" value="Contestar" id="contestar" class="botonEnviar">
+                <input type="text" id="respuesta">
+                <input type="submit" value="Contestar" id="contestar" class="botonEnviar">
+            </div>
         </div>
-    </div>
     </form>
 </body>
 <script src="preguntas.js"></script>
@@ -38,7 +65,7 @@
     }
 
     if (!sessionStorage.getItem("iteration")) {
-        sessionStorage.setItem("iteration", 0);
+        sessionStorage.setItem("iteration", -1);
     }
 
     if (!sessionStorage.getItem("aciertos")) {
@@ -73,13 +100,13 @@
             let user_response = cleanString(document.getElementById("respuesta").value);
 
             if (true_response == user_response) {
-                alert("Has acertado la pregunta");
+                //alert("Has acertado la pregunta");
                 preguntasSS[i].estado = 2;
                 let value = parseInt(sessionStorage.getItem("aciertos"));
                 value++;
                 sessionStorage.setItem("aciertos", value);
             } else {
-                alert("Has fallado la pregunta");
+                //alert("Has fallado la pregunta");
                 preguntasSS[i].estado = 1;
                 let value = parseInt(sessionStorage.getItem("fallos"));
                 value++;
@@ -88,57 +115,44 @@
 
             //actualizamos las preguntas en el sessionStorage
             sessionStorage.setItem("preguntas", JSON.stringify(preguntasSS));
-        } else {
-            //alert("Pasapalabra!");
         }
-
-        //Por último itereamos hasta la próxima pregunta sin contestar.
-        do {
-            iterarRosco();
-        } while (preguntasSS[sessionStorage.getItem("iteration")].estado > 0);
     }
 
     function iterarRosco() {
-        let value = parseInt(sessionStorage.getItem("iteration"));
-        value++;
-        if (value < 26) {
-            sessionStorage.setItem("iteration", value);
-        } else {
-            sessionStorage.setItem("iteration", 0);
-        }
+        let preguntasSS = JSON.parse(sessionStorage.getItem("preguntas"));
+        let current = parseInt(sessionStorage.getItem("iteration"));
+        do {
+            current = (current + 1 < 26) ? current + 1 : 0;
+            sessionStorage.setItem("iteration", current);
+            console.log(current);
+        } while (preguntasSS[current].estado > 0);
     }
 
-    function printRosco() {
-        let i = sessionStorage.getItem("iteration");
-        let preguntaSS = JSON.parse(sessionStorage.getItem("preguntas"));
-        let current = preguntaSS[i].letra;
-        preguntaSS = preguntaSS.reverse();
-        for (let element of preguntaSS) {
-            let rosco = document.getElementById("rosco");
-            let letra_div = document.createElement("div");
-            letra_div.innerHTML = element.letra;
+    function updateRosco() {
+        let preguntasSS = JSON.parse(sessionStorage.getItem("preguntas"));
+        let current = sessionStorage.getItem("iterarion");
+        let rosco = document.getElementById("rosco");
+        for (let i = 0, clase = ""; i < preguntasSS.length; i++) {
+            let element = preguntasSS[i];
 
-            // Indicamos la clase que recibirá el div
             if (element.estado == 1) {
-                letra_div.className = "incorrect"
+                clase = "incorrect";
             } else if (element.estado == 2) {
-                letra_div.className = "correct"
+                clase = "correct";
             } else {
-                if (element.letra == current) {
-                    letra_div.className = "currentLetter";
+                if (sessionStorage.getItem("iteration") == i) {
+                    clase = "currentLetter";
                 } else {
-                    letra_div.className = "abecedario";
+                    clase = "abecedario";
                 }
             }
-            rosco.prepend(letra_div);
+            rosco.children[i].className = clase;
         }
     }
 
     function printAciertos() {
         let aciertos = parseInt(sessionStorage.getItem("aciertos"));
-
         let tag_aciertos = document.getElementById("aciertos");
-
         tag_aciertos.innerHTML = aciertos;
     }
 
@@ -150,28 +164,57 @@
 
         if (tiempoRestante <= 0) {
             clearInterval(intervalo);
-            alert("¡Tiempo finalizado!"); // Acción cuando el tiempo termina
             sessionStorage.removeItem("timer");
+            finish();
         } else {
             tiempoRestante--;
             sessionStorage.setItem("timer", tiempoRestante);
         }
     }
 
-    function printQuestion(){
+    function printQuestion() {
         let preguntasSS = JSON.parse(sessionStorage.getItem("preguntas"));
         let i = sessionStorage.getItem("iteration");
 
+        //Indicamos si tiene o contiene la letra
+        let h1 = document.getElementById("questionType");
+        if (preguntasSS[i].tipo == "contiene") {
+            h1.innerHTML = "Contiene la Letra " + preguntasSS[i].letra;
+        } else {
+            h1.innerHTML = "Empieza con la Letra " + preguntasSS[i].letra;
+        }
+
+        // Pintamos la pregunta
         let div = document.getElementById("pregunta");
         div.innerHTML = preguntasSS[i].pregunta;
     }
 
     function printWebHTML() {
-        printRosco();
-        printAciertos();
-        printQuestion();
-        let intervalo = setInterval(updateTimer, 1000);
-        updateTimer(intervalo);
+        if (!((parseInt(sessionStorage.getItem("aciertos")) + parseInt(sessionStorage.getItem("fallos"))) == 26)) {
+            iterarRosco();
+            updateRosco();
+            printAciertos();
+            printQuestion();
+
+            let intervalo = setInterval(updateTimer, 1000);
+            updateTimer(intervalo);
+        } else {
+            finish();
+        }
+    }
+
+    function finish() {
+        if (!localStorage.getItem("ranking")) {
+            localStorage.setItem("ranking", JSON.stringify(new Array()));
+        }
+        let user = sessionStorage.getItem("user");
+        let score = sessionStorage.getItem("aciertos");
+        let entry = { "user": user, "score": score };
+
+        let ranking = JSON.parse(localStorage.getItem("ranking"));
+        ranking.push(entry);
+        localStorage.setItem("ranking", JSON.stringify(ranking));
+        window.location.href = "./ranking.html";
     }
 
     // añadimos el evento submit al formulario
@@ -181,4 +224,5 @@
     //Pintamos el contenido de la pagina web
     printWebHTML();
 </script>
+
 </html>

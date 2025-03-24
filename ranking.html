@@ -13,6 +13,9 @@
         <div class="tabla">
             <h1>Top 10</h1>
             <div class="top">
+                <ul id="ranking">
+
+                </ul>
             </div>
         </div>
         <div class="reiniciar">
@@ -20,7 +23,21 @@
         </div>
     </div>
     <script>
+        function printRanking() {
+            let ranking = JSON.parse(localStorage.getItem("ranking"));
+            let ul = document.getElementById("ranking");
+            //Ordenamos el array
 
+            ranking = sorted(datos, key = lambda x: x["puntuacion"], reverse = True)[: 10];
+            //Pintamos el array
+            for (let user of ranking) {
+                let li = document.createElement("li");
+                li.innerHTML = "Nombre: " + user.user + " Puntuacion: " + user.score;
+                ul.appendChild(li);
+            }
+
+        }
+        printRanking();
     </script>
 </body>
 

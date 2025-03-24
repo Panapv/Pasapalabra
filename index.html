@@ -10,11 +10,20 @@
 
 <body>
     <div>
-        <form class="form" id="form">
-            <input type="text" id="respuesta">
-            <input type="submit" value="JUGAR" id="jugar" class="botonJugar">
+        <form class="form" id="user_register" action="game.html">
+            <input type="text" class="nombre" id="user_name">
+            <input type="submit" value="JUGAR" id="start_btn" class="botonJugar">
         </form>
     </div>
 </body>
-
+<script>
+    function startGame(){
+        let user = document.getElementById("user_name");
+        user = user.value.toUpperCase();
+        sessionStorage.setItem("user", user);
+    }
+    //Añadimos un evento para el submit del Form
+    let form = document.getElementById("user_register");
+    form.addEventListener("submit", startGame);
+</script>
 </html>
