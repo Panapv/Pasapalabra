@@ -22,6 +22,7 @@
     </div>
     <div class="reiniciar">
         <input type="button" value="reiniciar" class="boton2" onclick="restart()">
+        <input type="button" value="Limpiar" class="boton2" onclick="clean()">
     </div>
     <script>
         function printRanking() {
@@ -42,6 +43,12 @@
         function restart(){
             window.location.href = "./index.html";
         }
+
+        function clean(){
+            localStorage.setItem("ranking", JSON.stringify(new Array()));
+            restart();
+        }
+
         printRanking();
     </script>
 </body>
