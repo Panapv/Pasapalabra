@@ -13,9 +13,6 @@
 <body>
     <form class="formulario" id="form">
         <div class="contenedor">
-            <div id="overlay" class="overlay" hidden>
-                <div class="message" id="resultMessage"></div>
-            </div>
             <div class="rosco" id="rosco">
                 <div class="abecedario">A</div>
                 <div class="abecedario">B</div>
@@ -44,9 +41,12 @@
                 <div class="abecedario">Y</div>
                 <div class="abecedario">Z</div>
                 <div class="inRosco">
-                    <h1 id="questionType">Empieza o Contiene:</h1>
+                    <h1 id="questionType"></h1>
                     <p id="pregunta"></p>
                     <input type="submit" value="Pasapalabra" id="pasapalabra" class="boton">
+                    <div id="overlay" class="overlay" hidden>
+                        <div class="message" id="resultMessage"></div>
+                    </div>
                 </div>
             </div>
             <div class="inputs">
@@ -100,21 +100,24 @@
             let true_response = cleanString(elemento.respuesta);
             let user_response = cleanString(document.getElementById("respuesta").value);
             let resultMessage = document.getElementById("resultMessage");
-
+            let saltoLinea = document.createElement("br");
             if (true_response == user_response) {
                 resultMessage.textContent = "Correcto!";
+                resultMessage.classList.remove("fallar");
+                resultMessage.classList.add("acertar");
                 preguntasSS[i].estado = 2;
                 let value = parseInt(sessionStorage.getItem("aciertos"));
                 value++;
                 sessionStorage.setItem("aciertos", value);
             } else {
-                resultMessage.textContent = "Te has equivocado!\tLa palabra correcta es: "+preguntasSS[i].respuesta;
+                resultMessage.innerHTML = "Incorrecto!<br>La palabra es: " + preguntasSS[i].respuesta;
+                resultMessage.classList.remove("acertar");
+                resultMessage.classList.add("fallar");
                 preguntasSS[i].estado = 1;
                 let value = parseInt(sessionStorage.getItem("fallos"));
                 value++;
                 sessionStorage.setItem("fallos", value);
             }
-
             //actualizamos las preguntas en el sessionStorage
             sessionStorage.setItem("preguntas", JSON.stringify(preguntasSS));        
     }
@@ -149,7 +152,7 @@
 
     function updateRosco() {
         let preguntasSS = JSON.parse(sessionStorage.getItem("preguntas"));
-        let current = sessionStorage.getItem("iterarion");
+        let current = sessionStorage.getItem("itetarion");
         let rosco = document.getElementById("rosco");
         for (let i = 0, clase = ""; i < preguntasSS.length; i++) {
             let element = preguntasSS[i];

@@ -1,8 +1,8 @@
 let preguntas = [
-  { "letra": "A", "pregunta": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "respuesta": "A", "estado": 0, "tipo": "empieza" },
-  { "letra": "B", "pregunta": "", "respuesta": "B", "estado": 0, "tipo": "contiene" },
-  { "letra": "C", "pregunta": "", "respuesta": "C", "estado": 0, "tipo": "empieza" },
-  { "letra": "D", "pregunta": "", "respuesta": "D", "estado": 0, "tipo": "contiene" },
+  { "letra": "A", "pregunta": "Sustancia que se usa para endulzar los alimentos.", "respuesta": "Azúcar", "estado": 0, "tipo": "empieza" },
+  { "letra": "B", "pregunta": "", "respuesta": "bufanda", "estado": 0, "tipo": "contiene" },
+  { "letra": "C", "pregunta": "", "respuesta": "Caleidoscopio", "estado": 0, "tipo": "empieza" },
+  { "letra": "D", "pregunta": "", "respuesta": "Dinosaurio", "estado": 0, "tipo": "contiene" },
   { "letra": "E", "pregunta": "", "respuesta": "E", "estado": 0, "tipo": "empieza" },
   { "letra": "F", "pregunta": "", "respuesta": "F", "estado": 0, "tipo": "contiene" },
   { "letra": "G", "pregunta": "", "respuesta": "G", "estado": 0, "tipo": "empieza" },
