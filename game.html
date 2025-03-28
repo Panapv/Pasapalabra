@@ -28,6 +28,7 @@
                 <div class="abecedario">L</div>
                 <div class="abecedario">M</div>
                 <div class="abecedario">N</div>
+                <div class="abecedario">Ñ</div>
                 <div class="abecedario">O</div>
                 <div class="abecedario">P</div>
                 <div class="abecedario">Q</div>
@@ -91,40 +92,44 @@
         return str;
     }
 
-    function updatePreguntas(){
+    function updatePreguntas() {
         //Cargamos las variables de sesion
         let preguntasSS = JSON.parse(sessionStorage.getItem("preguntas"));
         //A continuación comprobamos que la respuesta sea correcta.
         let i = sessionStorage.getItem("iteration");
-            let elemento = preguntasSS[i];
-            let true_response = cleanString(elemento.respuesta);
-            let user_response = cleanString(document.getElementById("respuesta").value);
-            let resultMessage = document.getElementById("resultMessage");
-            if (true_response == user_response) {
-                resultMessage.textContent = "Correcto!";
-                resultMessage.classList.remove("fallar");
-                resultMessage.classList.add("acertar");
-                preguntasSS[i].estado = 2;
-                let value = parseInt(sessionStorage.getItem("aciertos"));
-                value++;
-                sessionStorage.setItem("aciertos", value);
-            } else {
-                resultMessage.innerHTML = "Incorrecto!<br>La palabra es: " + preguntasSS[i].respuesta;
-                resultMessage.classList.remove("acertar");
-                resultMessage.classList.add("fallar");
-                preguntasSS[i].estado = 1;
-                let value = parseInt(sessionStorage.getItem("fallos"));
-                value++;
-                sessionStorage.setItem("fallos", value);
-            }
-            //actualizamos las preguntas en el sessionStorage
-            sessionStorage.setItem("preguntas", JSON.stringify(preguntasSS));        
+        let elemento = preguntasSS[i];
+        let true_response = cleanString(elemento.respuesta);
+        let user_response = cleanString(document.getElementById("respuesta").value);
+        let resultMessage = document.getElementById("resultMessage");
+        if (true_response == user_response) {
+            resultMessage.textContent = "Correcto!";
+            resultMessage.classList.remove("fallar");
+            resultMessage.classList.add("acertar");
+            preguntasSS[i].estado = 2;
+            let value = parseInt(sessionStorage.getItem("aciertos"));
+            value++;
+            sessionStorage.setItem("aciertos", value);
+        } else {
+            resultMessage.innerHTML = "Incorrecto!<br>La palabra es: " + preguntasSS[i].respuesta;
+            resultMessage.classList.remove("acertar");
+            resultMessage.classList.add("fallar");
+            preguntasSS[i].estado = 1;
+            let value = parseInt(sessionStorage.getItem("fallos"));
+            value++;
+            sessionStorage.setItem("fallos", value);
+        }
+        //actualizamos las preguntas en el sessionStorage
+        sessionStorage.setItem("preguntas", JSON.stringify(preguntasSS));
     }
 
     function displayResult(event) {
         let overlay = document.getElementById("overlay");
         overlay.removeAttribute("hidden");
         overlay.addEventListener("click", () => {
+            overlay.setAttribute("hidden", true);
+            event.target.submit();
+        });
+        document.addEventListener("keydown", () => {
             overlay.setAttribute("hidden", true);
             event.target.submit();
         });
@@ -217,6 +222,9 @@
             printAciertos();
             printQuestion();
 
+            let respuesta = document.getElementById("respuesta");
+            respuesta.focus();
+
             let intervalo = setInterval(updateTimer, 1000);
             updateTimer(intervalo);
         } else {
@@ -238,9 +246,24 @@
         window.location.href = "./ranking.html";
     }
 
+    function handleEnterKey(event) {
+        let respuesta = document.getElementById("respuesta");
+        if (event.key === "Enter") {
+            respuesta.blur();
+            if (respuesta.value.length > 0) {
+                document.getElementById('contestar').click();
+            } else {
+                document.getElementById('pasapalabra').click();
+            }
+            document.removeEventListener("keydown", handleEnterKey)
+        }
+    }
+
     // añadimos el evento submit al formulario
     let form = document.getElementById("form");
     form.addEventListener("submit", enviarForm);
+
+    document.addEventListener("keydown", handleEnterKey);
 
     //Pintamos el contenido de la pagina web
     printWebHTML();
