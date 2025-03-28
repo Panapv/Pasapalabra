@@ -100,7 +100,6 @@
             let true_response = cleanString(elemento.respuesta);
             let user_response = cleanString(document.getElementById("respuesta").value);
             let resultMessage = document.getElementById("resultMessage");
-            let saltoLinea = document.createElement("br");
             if (true_response == user_response) {
                 resultMessage.textContent = "Correcto!";
                 resultMessage.classList.remove("fallar");
