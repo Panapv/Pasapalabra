@@ -13,6 +13,7 @@ let preguntas = [
   { "letra": "L", "pregunta": "Palo vertical que sostiene las velas de un barco.", "respuesta": "Mastil", "estado": 0, "tipo": "contiene" },
   { "letra": "M", "pregunta": "Roca metamórfica compacta formada a partir de rocas calizas", "respuesta": "Mármol", "estado": 0, "tipo": "empieza" },
   { "letra": "N", "pregunta": "Mamífero herbívoro, de hábitos nocturnos, que vive en madrigueras y que es apreciado por su carne y su pelo", "respuesta": "Conejo", "estado": 0, "tipo": "contiene" },
+  { "letra": "Ñ", "pregunta": "Plato elaborado patata, harina y huevo", "respuesta": "Ñoquis", "estado": 0, "tipo": "contiene" },
   { "letra": "O", "pregunta": "Objeto con varios agujeros que sirve para colar alimentos.", "respuesta": "Colador", "estado": 0, "tipo": "contiene" },
   { "letra": "P", "pregunta": "Quebrar o hacer pedazos algo.", "respuesta": "Romper", "estado": 0, "tipo": "contiene" },
   { "letra": "Q", "pregunta": "Que no tiene o no hace movimiento.", "respuesta": "Quieto", "estado": 0, "tipo": "empieza" },
