@@ -5,12 +5,51 @@ body {
     padding: 0;
     overflow: hidden;
 }
+#LogoInstituto {
+    display: block;
+    margin: 2rem auto 0 auto;
+    width: 250px; 
+}
+#LogoInstituto2 {
+    display: block;
+    margin: 2rem auto 0 auto; 
+    width: 150px; 
+}
+#creadores {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#creadores h2 {
+    margin: 0 0 5px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+#creadores p {
+    margin: 0;
+    line-height: 1.2;
+}
 
 body {
     background-image: url(../IMG/fondo.gif);
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     margin: 0;
+    margin-top: auto;
 }
 
 .formulario {
@@ -22,7 +61,7 @@ body {
     display: grid;
     justify-content: center;
     align-items: center;
-    height: 80%;
+    height: 40%;
 }
 
 #tituloIndex {
